@@ -38,13 +38,134 @@
         <h4>Menu</h4>
         <ul>
           <li><a class="active" href="index.html">Trang chủ</a></li>
-          <li><a href="ly-lich.html"> Lý lịch cá nhân</a></li>
+          <li>
+            <a href="gioi-thieu-ban-than.html"> 1.1 Giới thiệu bản thân</a>
+          </li>
+          <li><a href="bang-diem.html"> 1.2 Bảng điểm</a></li>
+          <li><a href="ly-lich.html">1.3 Lí lịch</a></li>
         </ul>
       </nav>
 
-      <main class="main">
-        <h2>Nội dung chính theo yêu cầu</h2>
-        <p>Đây là vùng hiển thị nội dung bài hiện tại.</p>
+      <main class="main card slide-up">
+        <!-- HERO -->
+        <section class="hero">
+          <h1>Chào mừng đến học phần <span>Web An Toàn</span></h1>
+          <p class="lead">
+            HTML/CSS • Web Server (XAMPP) • PHP/MySQL • Git/GitHub • OWASP/Burp
+          </p>
+          <div class="cta">
+            <a class="btn primary" href="gioi-thieu-ban-than.html">Xem hồ sơ</a>
+            <a class="btn" href="bang-diem.html">Xem bảng điểm</a>
+            <a class="btn outline" href="#baitap">Danh mục bài tập</a>
+          </div>
+        </section>
+
+        <!-- 4 TRỤ CỘT HỌC PHẦN -->
+        <section class="grid features">
+          <article class="card-feature">
+            <h3>HTML &amp; CSS</h3>
+            <p>
+              Dàn trang, bố cục grid/flex, component UI cơ bản. Chuẩn SEO &amp;
+              truy cập.
+            </p>
+          </article>
+          <article class="card-feature">
+            <h3>Web Server</h3>
+            <p>
+              Apache/XAMPP, virtual host, cấu hình cổng, phpMyAdmin, cấu trúc dự
+              án.
+            </p>
+          </article>
+          <article class="card-feature">
+            <h3>Git &amp; GitHub</h3>
+            <p>
+              Quy trình <em>pull → code → commit → push</em>, làm việc trên 2
+              máy an toàn.
+            </p>
+          </article>
+          <article class="card-feature">
+            <h3>OWASP &amp; Burp</h3>
+            <p>
+              Nắm các nhóm rủi ro Top 10, thao tác intercept/request để hiểu bề
+              mặt tấn công.
+            </p>
+          </article>
+        </section>
+
+        <!-- BẮT ĐẦU NHANH -->
+        <section class="qs">
+          <h2>Hướng dẫn sử dụng git cơ bản:</h2>
+          <ol class="steps">
+            <li class="step">
+              <strong>Pull</strong> dự án từ GitHub trên máy hiện tại.
+            </li>
+            <li class="step">
+              Mở thư mục bằng VS Code → bật <em>Live Server</em> (nếu có).
+            </li>
+            <li class="step">
+              Tạo/ sửa trang trong mục <code>bt2/</code> (giữ CSS dùng chung).
+            </li>
+            <li class="step">
+              <strong>Commit</strong> thay đổi, sau đó <strong>Push</strong>.
+            </li>
+            <li class="step">
+              Sang máy thứ hai và <strong>Pull</strong> để tiếp tục.
+            </li>
+          </ol>
+        </section>
+
+        <!-- THÔNG BÁO -->
+        <section class="notice">
+          <strong>Thông báo:</strong> Bài tập 2 yêu cầu
+          <u>chỉ dùng HTML + CSS</u>
+        </section>
+
+        <!-- DANH MỤC BÀI TẬP -->
+        <section id="baitap" class="assignments">
+          <h2>Danh mục bài tập</h2>
+          <ul class="resource-list">
+            <li>
+              <span class="pill done">BT1</span> Cấu hình ứng dụng web
+              (XAMPP/Apache, vhost)
+            </li>
+            <li><span class="pill active">BT2</span> HTML &amp; CSS</li>
+            <li><span class="pill">BT3</span> HTML, CSS &amp; JavaScript</li>
+            <li><span class="pill">BT4</span> PHP &amp; CSDL</li>
+            <li><span class="pill">BT5</span> Khai thác lỗ hổng Web</li>
+            <li><span class="pill">BT6</span> An toàn &amp; Nâng cao</li>
+          </ul>
+        </section>
+
+        <!-- TÀI LIỆU THAM KHẢO -->
+        <section class="resources">
+          <h2>Tài liệu tham khảo</h2>
+          <ul class="links">
+            <li>
+              <a
+                target="_blank"
+                rel="noopener"
+                href="https://owasp.org/www-project-top-ten/"
+                >OWASP Top 10</a
+              >
+            </li>
+            <li>
+              <a
+                target="_blank"
+                rel="noopener"
+                href="https://portswigger.net/burp/documentation"
+                >Burp Suite Docs</a
+              >
+            </li>
+            <li>
+              <a
+                target="_blank"
+                rel="noopener"
+                href="https://httpd.apache.org/docs/"
+                >Apache HTTP Server Docs</a
+              >
+            </li>
+          </ul>
+        </section>
       </main>
 
       <footer class="footer">Thông tin của tôi – © 2025</footer>
