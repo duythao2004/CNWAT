@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bài tập 2 – Giới thiệu bản thân</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <section class="student">
+        <div class="avatar">
+          <img src="assets/img/me.jpg" alt="Ảnh của tôi" />
+        </div>
+        <div>
+          <h3>Thông tin sinh viên</h3>
+          <p><strong>Họ và tên:</strong> Nguyễn Duy Thảo</p>
+          <p><strong>MSV:</strong> AT190351</p>
+        </div>
+      </section>
+
+      <header class="banner banner--video">
+        <video
+          class="banner-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster="assets/img/banner-poster.jpg"
+        >
+          <source src="assets/video/banner.webm" type="video/webm" />
+          <source src="assets/video/banner.mp4" type="video/mp4" />
+          Trình duyệt của bạn không hỗ trợ video.
+        </video>
+      </header>
+
+      <nav class="menu" aria-label="Menu">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="index.html">Trang chủ</a></li>
+          <li>
+            <a href="gioi-thieu-ban-than.html">1.1 Giới thiệu bản thân</a>
+          </li>
+          <li><a href="bang-diem.html"> 1.2 Bảng điểm</a></li>
+          <li><a href="ly-lich.html">1.3 Lí lịch</a></li>
+          <li><a class="active" href="tin-tuc.html">1.4 Tin tức</a></li>
+        </ul>
+      </nav>
+
+      <main class="main card slide-up news" aria-labelledby="news-title">
+        <header class="news-header">
+          <h1 id="news-title">Tin mới</h1>
+
+          <!-- Nhóm chủ đề (chỉ là link tĩnh, không dùng JS) -->
+          <nav class="chips" aria-label="Chủ đề">
+            <a class="chip active" href="#">Tất cả</a>
+            <a class="chip" href="#">Công nghệ</a>
+            <a class="chip" href="#">An toàn thông tin</a>
+            <a class="chip" href="#">Học tập</a>
+            <a class="chip" href="#">Khác</a>
+          </nav>
+        </header>
+
+        <!-- Hero bài viết nổi bật -->
+        <section class="news-hero">
+          <figure class="hero-media">
+            <!-- Đặt ảnh thật tại: assets/img/news-hero.jpg -->
+            <img
+              src="assets/img/news-hero.jpg"
+              alt="Ảnh minh hoạ bài viết nổi bật"
+            />
+          </figure>
+          <div class="hero-body">
+            <a class="hero-title" href="#">
+              OWASP công bố bản cập nhật hướng dẫn kiểm thử web – điểm nhấn 2025
+            </a>
+            <p class="hero-excerpt">
+              Tổng quan thay đổi đáng chú ý, gợi ý chiến lược kiểm thử theo rủi
+              ro, cùng các ví dụ áp dụng thực tế cho nhóm phát triển web và
+              pentest.
+            </p>
+            <div class="meta">
+              <span class="badge">An toàn thông tin</span>
+              <time datetime="2025-09-18">18/09/2025</time>
+              <span>5 phút đọc</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Lưới thẻ bài viết -->
+        <section class="news-grid" aria-label="Danh sách bài viết">
+          <!-- Card 1 -->
+          <article class="card-article">
+            <a class="cover" href="#">
+              <img src="assets/img/news-1.jpg" alt="Ảnh minh hoạ bài viết 1" />
+            </a>
+            <div class="body">
+              <a class="title" href="#"
+                >10 mẹo tối ưu CSS giúp trang mượt hơn</a
+              >
+              <p class="excerpt">
+                Giảm layout shift, dùng container queries, và tối ưu font để cải
+                thiện UX.
+              </p>
+              <div class="meta">
+                <span class="badge">Frontend</span>
+                <time datetime="2025-09-17">17/09/2025</time>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="card-article">
+            <a class="cover" href="#">
+              <img src="assets/img/news-2.jpg" alt="Ảnh minh hoạ bài viết 2" />
+            </a>
+            <div class="body">
+              <a class="title" href="#"
+                >Cách tổ chức thư mục assets cho dự án HTML/CSS</a
+              >
+              <p class="excerpt">
+                Quy ước đặt tên, giữ chỗ thư mục rỗng bằng .gitkeep, và tránh
+                lỗi khi deploy.
+              </p>
+              <div class="meta">
+                <span class="badge">Best Practices</span>
+                <time datetime="2025-09-16">16/09/2025</time>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="card-article">
+            <a class="cover" href="#">
+              <img src="assets/img/news-3.jpg" alt="Ảnh minh hoạ bài viết 3" />
+            </a>
+            <div class="body">
+              <a class="title" href="#">Giới thiệu Burp Suite cho người mới</a>
+              <p class="excerpt">
+                Luồng proxy, repeater, intruder và mẹo cấu hình nhanh để test
+                web app.
+              </p>
+              <div class="meta">
+                <span class="badge">Pentest</span>
+                <time datetime="2025-09-15">15/09/2025</time>
+              </div>
+            </div>
+          </article>
+
+          <!-- Thêm các card 4,5,6... tương tự -->
+        </section>
+
+        <!-- Phân trang tĩnh (HTML thuần) -->
+        <nav class="pagination" aria-label="Phân trang">
+          <a class="page disabled" href="#" aria-disabled="true">« Trước</a>
+          <a class="page active" href="#">1</a>
+          <a class="page" href="#">2</a>
+          <a class="page" href="#">3</a>
+          <a class="page" href="#">Sau »</a>
+        </nav>
+      </main>
+
+      <footer class="footer">Thông tin của tôi – © 2025</footer>
+    </div>
+  </body>
+</html>
