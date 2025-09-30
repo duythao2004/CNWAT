@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <base href="/CNWAT/" />
+    <title>Bài 3 – 2.11 Hoạt ảnh (SVG)</title>
+
+    <!-- tái dùng CSS bài 2 nếu bạn đang có -->
+    <link rel="stylesheet" href="bt2/css/style.css" />
+
+    <style>
+      .anim-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .toolbar {
+        display: flex;
+        gap: 8px;
+      }
+      .btn {
+        padding: 6px 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        background: #f8fafc;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background: #e9f6ff;
+      }
+      .stage {
+        width: 280px;
+        height: 300px;
+        display: grid;
+        place-items: center;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        background: #fff;
+      }
+
+      svg {
+        width: 200px;
+        height: 260px;
+      }
+      .line {
+        stroke: #0f172a;
+        stroke-width: 5;
+        stroke-linecap: round;
+        fill: none;
+      }
+
+      /* Gốc xoay CHÍNH XÁC tại vai/hông (tính theo viewBox 200x240) */
+      #leftArm,
+      #rightArm {
+        transform-origin: 100px 110px;
+        transition: transform 0.18s ease;
+      }
+      #leftLeg,
+      #rightLeg {
+        transform-origin: 100px 170px;
+        transition: transform 0.18s ease;
+      }
+
+      /* ---- Các tư thế ---- */
+      /* 1: đứng tay xuôi */
+      .pose1 #leftArm {
+        transform: rotate(1deg);
+      }
+      .pose1 #rightArm {
+        transform: rotate(-1deg);
+      }
+      .pose1 #leftLeg {
+        transform: rotate(1deg);
+      }
+      .pose1 #rightLeg {
+        transform: rotate(-1deg);
+      }
+
+      /* 2: dang tay vừa, bước chân trái sau phải trước */
+      .pose2 #leftArm {
+        transform: rotate(60deg);
+      }
+      .pose2 #rightArm {
+        transform: rotate(-60deg);
+      }
+      .pose2 #leftLeg {
+        transform: rotate(-15deg);
+      }
+      .pose2 #rightLeg {
+        transform: rotate(15deg);
+      }
+
+      /* 3: dang tay cao (đỉnh nhảy) */
+      .pose3 #leftArm {
+        transform: rotate(90deg);
+      }
+      .pose3 #rightArm {
+        transform: rotate(-90deg);
+      }
+      .pose3 #leftLeg {
+        transform: rotate(18deg);
+      }
+      .pose3 #rightLeg {
+        transform: rotate(-18deg);
+      }
+
+      /* 4: dang ngang, đổi chân so với 2 */
+      .pose4 #leftArm {
+        transform: rotate(55deg);
+      }
+      .pose4 #rightArm {
+        transform: rotate(-55deg);
+      }
+      .pose4 #leftLeg {
+        transform: rotate(-20deg);
+      }
+      .pose4 #rightLeg {
+        transform: rotate(20deg);
+      }
+
+      .hint {
+        color: #6b7280;
+        font-size: 13px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <!-- Cột trái (giữ nguyên format bài 2 nếu bạn muốn) -->
+      <section class="student">
+        <div class="avatar">
+          <img src="bt2/assets/img/me.jpg" alt="Ảnh của tôi" />
+        </div>
+        <div>
+          <h3>Thông tin sinh viên</h3>
+          <p><strong>Họ và tên:</strong> Nguyễn Duy Thảo</p>
+          <p><strong>MSSV:</strong> AT190351</p>
+        </div>
+      </section>
+
+      <!-- Banner (tùy chọn) -->
+      <header class="banner banner--video">
+        <video
+          class="banner-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster="bt2/assets/img/banner-poster.jpg"
+        >
+          <source src="bt2/assets/video/banner.webm" type="video/webm" />
+          <source src="bt2/assets/video/banner.mp4" type="video/mp4" />
+        </video>
+      </header>
+
+      <!-- Menu trái rút gọn (có thể thay bằng menu đầy đủ của bạn) -->
+      <nav class="menu" aria-label="Menu">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="bt2/index.html">Trang chủ</a></li>
+          <li>
+            <a href="bt2/gioi-thieu-ban-than.html">1.1 Giới thiệu bản thân</a>
+          </li>
+          <li><a href="bt2/bang-diem.html">1.2 Bảng điểm</a></li>
+          <li><a href="bt2/ly-lich.html">1.3 Lý lịch</a></li>
+          <li><a href="bt2/tin-tuc.html">1.4 Tin tức</a></li>
+          <li>
+            <a href="bt3/vidu.html">2.1 Ví dụ JS</a>
+          </li>
+          <li><a href="bt3/trac-nghiem.html">2.2 Thi trắc nghiệm</a></li>
+          <li><a href="bt3/nhap-lop.html">2.3 Form LOP</a></li>
+          <li><a href="bt3/nhap-hoso.html">2.4 Hồ sơ (HOSO)</a></li>
+          <li><a href="bt3/form-dang-ky.html">2.5 Form đăng ký</a></li>
+          <li><a href="bt3/danh-sach.html">2.6 Danh sách</a></li>
+          <li><a href="bt3/thuc-don.html">2.7 Thực đơn</a></li>
+          <li><a href="bt3/tab.html">2.8 Tab</a></li>
+          <li><a href="bt3/cay.html">2.9 Cây</a></li>
+          <li><a href="bt3/may-tinh.html">2.10. Máy tính</a></li>
+            <a class="active" href="bt3/hoat-anh.html"
+              >2.11 Hoạt ảnh </a
+            >
+          </li>
+          <li><a href="bt3/sap-xep.html">2.12 Sắp xếp</a></li>
+
+        </ul>
+      </nav>
+
+      <!-- MAIN -->
+      <main class="main card">
+        <h1>2.11 Hoạt ảnh – SVG (Jump / Stop)</h1>
+
+        <div class="anim-wrap">
+          <div class="toolbar">
+            <button id="btnJump" class="btn">Jump</button>
+            <button id="btnStop" class="btn">Stop</button>
+          </div>
+
+          <div class="stage">
+            <!-- Người que bằng SVG: đầu/thân cố định; tay/chân đổi tư thế bằng class -->
+            <svg
+              viewBox="0 0 200 240"
+              id="stick"
+              class="pose1"
+              aria-label="stickman"
+            >
+              <!-- đầu -->
+              <circle cx="100" cy="60" r="18" class="line" fill="none" />
+              <!-- thân -->
+              <line x1="100" y1="78" x2="100" y2="170" class="line" />
+              <!-- tay -->
+              <line
+                id="leftArm"
+                x1="100"
+                y1="110"
+                x2="60"
+                y2="130"
+                class="line"
+              />
+              <line
+                id="rightArm"
+                x1="100"
+                y1="110"
+                x2="140"
+                y2="130"
+                class="line"
+              />
+              <!-- chân -->
+              <line
+                id="leftLeg"
+                x1="100"
+                y1="170"
+                x2="80"
+                y2="210"
+                class="line"
+              />
+              <line
+                id="rightLeg"
+                x1="100"
+                y1="170"
+                x2="120"
+                y2="210"
+                class="line"
+              />
+            </svg>
+          </div>
+
+          <p class="hint">
+            • Nhấn <b>Jump</b> để chạy (1→2→3→4→3→2→1…). <b>Stop</b> để dừng. •
+            Nhấn phím <b>Space</b> để tạm dừng/tiếp tục.
+          </p>
+        </div>
+      </main>
+
+      <footer class="footer">Thông tin bản quyền – © 2025</footer>
+    </div>
+
+    <script>
+      const stick = document.getElementById("stick");
+      const btnJump = document.getElementById("btnJump");
+      const btnStop = document.getElementById("btnStop");
+
+      const poses = ["pose1", "pose2", "pose3", "pose4"]; // chuỗi pose
+      let i = 0; // vị trí hiện tại
+      let dir = 1; // 1: tiến, -1: lùi
+      let timer = null;
+      const SPEED = 220; // ms/khung (tăng/giảm tốc ở đây)
+
+      function setPose(idx) {
+        poses.forEach((p) => stick.classList.remove(p));
+        stick.classList.add(poses[idx]);
+      }
+      function step() {
+        i += dir;
+        if (i === poses.length - 1 || i === 0) dir *= -1; // ping-pong
+        setPose(i);
+      }
+      function start() {
+        if (!timer) {
+          timer = setInterval(step, SPEED);
+        }
+      }
+      function stop() {
+        clearInterval(timer);
+        timer = null;
+      }
+
+      btnJump.addEventListener("click", start);
+      btnStop.addEventListener("click", stop);
+
+      // Space: tạm dừng/tiếp tục
+      window.addEventListener("keydown", (e) => {
+        if (e.code === "Space") {
+          e.preventDefault();
+          timer ? stop() : start();
+        }
+      });
+
+      // khởi tạo
+      setPose(0);
+    </script>
+  </body>
+</html>

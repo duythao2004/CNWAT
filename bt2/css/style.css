@@ -95,9 +95,11 @@ body {
   transform: translateY(-1px);
 }
 .menu a.active {
-  font-weight: 600;
-  border-color: #0a57d0;
+  background: #e0e7ff;
+  border-radius: 6px;
+  font-weight: bold;
 }
+
 .main {
   grid-area: main;
   border: var(--border);

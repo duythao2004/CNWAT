@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <base href="/CNWAT/" />
+    <title>Bài 3 – 2.4 Hồ sơ HOSO</title>
+    <link rel="stylesheet" href="bt2/css/style.css" />
+    <style>
+      .form {
+        max-width: 780px;
+        margin: 0 auto;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 180px 1fr;
+        gap: 12px;
+        align-items: center;
+        margin: 10px 0;
+      }
+      .row input,
+      .row textarea {
+        width: 100%;
+        padding: 8px 10px;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+      }
+      .row small {
+        grid-column: 2/3;
+        color: #dc2626;
+      }
+      .help {
+        grid-column: 2/3;
+        color: #6b7280;
+        font-size: 12px;
+      }
+      .actions {
+        margin-top: 14px;
+        display: flex;
+        gap: 8px;
+      }
+      .btn {
+        padding: 8px 12px;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        background: #f8fafc;
+        cursor: pointer;
+      }
+      .preview {
+        margin-top: 16px;
+        background: #f9fafb;
+        border: 1px dashed #e5e7eb;
+        border-radius: 10px;
+        padding: 12px;
+      }
+      .ok {
+        color: #16a34a;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <!-- Cột trái -->
+      <section class="student">
+        <div class="avatar"><img src="bt2/assets/img/me.jpg" alt="" /></div>
+        <div>
+          <h3>Thông tin sinh viên</h3>
+          <p><strong>Họ và tên:</strong> Nguyễn Duy Thảo</p>
+          <p><strong>MSSV:</strong> AT190351</p>
+        </div>
+      </section>
+
+      <!-- Banner -->
+      <header class="banner banner--video">
+        <video
+          class="banner-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster="bt2/assets/img/banner-poster.jpg"
+        >
+          <source src="bt2/assets/video/banner.webm" type="video/webm" />
+          <source src="bt2/assets/video/banner.mp4" type="video/mp4" />
+        </video>
+      </header>
+
+      <!-- Menu trái (thêm 2.4) -->
+      <nav class="menu" aria-label="Menu">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="bt2/index.html">Trang chủ</a></li>
+          <li>
+            <a href="bt2/gioi-thieu-ban-than.html">1.1 Giới thiệu bản thân</a>
+          </li>
+          <li><a href="bt2/bang-diem.html">1.2 Bảng điểm</a></li>
+          <li><a href="bt2/ly-lich.html">1.3 Lý lịch</a></li>
+          <li><a href="bt2/tin-tuc.html">1.4 Tin tức</a></li>
+          <li><a href="bt3/vidu.html">2.1 Ví dụ JS</a></li>
+          <li><a href="bt3/trac-nghiem.html">2.2 Thi trắc nghiệm</a></li>
+          <li><a href="bt3/nhap-lop.html">2.3 Nhập LOP</a></li>
+          <li>
+            <a class="active" href="bt3/nhap-hoso.html">2.4 Hồ sơ (HOSO)</a>
+          </li>
+          <li><a href="bt3/form-dang-ky.html">2.5 Form đăng ký</a></li>
+          <li><a href="bt3/danh-sach.html">2.6 Danh sách</a></li>
+          <li><a href="bt3/thuc-don.html">2.7 Thực đơn</a></li>
+          <li><a href="bt3/tab.html">2.8 Tab</a></li>
+          <li><a href="bt3/cay.html">2.9 Cây</a></li>
+          <li><a href="bt3/may-tinh.html">2.10. Máy tính</a></li>
+          <li><a href="bt3/hoat-anh.html">2.11 Hoạt ảnh</a></li>
+          <li><a href="bt3/sap-xep.html">2.12 Sắp xếp</a></li>
+        </ul>
+      </nav>
+
+      <!-- MAIN -->
+      <main class="main card form" aria-labelledby="title">
+        <h1 id="title">Thiết kế form nhập liệu cho bảng HOSO</h1>
+        <p class="help">
+          Ràng buộc theo đề: <b>MAHS</b> <i>Char(8)</i> – bắt buộc;
+          <b>HOTEN</b> <i>Char(50)</i>; <b>NGAYSINH</b> <i>Date</i>;
+          <b>DIACHI</b> <i>Char(150)</i>; <b>LOP</b> <i>Char(6)</i>;
+          <b>DIEMTOAN</b> <i>Float</i>.
+        </p>
+
+        <form id="hosoForm" novalidate>
+          <div class="row">
+            <label for="mahs"><strong>MAHS</strong> (Char(8))</label>
+            <input
+              id="mahs"
+              name="mahs"
+              maxlength="8"
+              placeholder="VD: HS190351"
+              inputmode="latin"
+              pattern="[A-Za-z0-9]{8}"
+              required
+            />
+            <small id="e-mahs"></small>
+            <div class="help">
+              Chính xác 8 ký tự chữ/số (A–Z, 0–9), viết liền, sẽ tự chuyển
+              UPPERCASE.
+            </div>
+          </div>
+
+          <div class="row">
+            <label for="hoten"><strong>HOTEN</strong> (Char(50))</label>
+            <input
+              id="hoten"
+              name="hoten"
+              maxlength="50"
+              placeholder="VD: Nguyễn Văn B"
+              required
+            />
+            <small id="e-hoten"></small>
+          </div>
+
+          <div class="row">
+            <label for="ngaysinh"><strong>NGAYSINH</strong> (Date)</label>
+            <input id="ngaysinh" name="ngaysinh" type="date" required />
+            <small id="e-ngaysinh"></small>
+            <div class="help">
+              Ngày sinh hợp lệ (không lớn hơn ngày hiện tại).
+            </div>
+          </div>
+
+          <div class="row">
+            <label for="diachi"><strong>DIACHI</strong> (Char(150))</label>
+            <input
+              id="diachi"
+              name="diachi"
+              maxlength="150"
+              placeholder="VD: 123 Nguyễn Trãi, Hà Nội"
+              required
+            />
+            <small id="e-diachi"></small>
+          </div>
+
+          <div class="row">
+            <label for="lop"><strong>LOP</strong> (Char(6))</label>
+            <input
+              id="lop"
+              name="lop"
+              maxlength="6"
+              placeholder="VD: AT1901"
+              inputmode="latin"
+              pattern="[A-Za-z0-9]{6}"
+              required
+            />
+            <small id="e-lop"></small>
+            <div class="help">Chính xác 6 ký tự chữ/số (A–Z, 0–9).</div>
+          </div>
+
+          <div class="row">
+            <label for="diemtoan"><strong>DIEMTOAN</strong> (Float)</label>
+            <input
+              id="diemtoan"
+              name="diemtoan"
+              type="number"
+              inputmode="decimal"
+              step="0.1"
+              min="0"
+              max="10"
+              placeholder="0.0 – 10.0"
+              required
+            />
+            <small id="e-diemtoan"></small>
+            <div class="help">
+              Điểm số thực trong khoảng 0.0 – 10.0 (bước 0.1).
+            </div>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn">Lưu</button>
+            <button type="reset" class="btn" id="btnReset">Xoá trắng</button>
+          </div>
+        </form>
+
+        <div id="preview" class="preview" hidden></div>
+      </main>
+
+      <footer class="footer">Thông tin bản quyền – © 2025</footer>
+    </div>
+
+    <script>
+      const f = document.getElementById("hosoForm");
+      const err = (id, msg = "") =>
+        (document.getElementById("e-" + id).textContent = msg);
+
+      function validate() {
+        let ok = true;
+
+        const mahs = f.mahs.value.trim().toUpperCase();
+        const hoten = f.hoten.value.trim();
+        const ngaysinh = f.ngaysinh.value;
+        const diachi = f.diachi.value.trim();
+        const lop = f.lop.value.trim().toUpperCase();
+        const diem = f.diemtoan.value.trim();
+
+        // MAHS: 8 ký tự chữ/số
+        if (!/^[A-Z0-9]{8}$/.test(mahs)) {
+          err("mahs", "MAHS phải đúng 8 ký tự chữ/số (A–Z,0–9).");
+          ok = false;
+        } else err("mahs");
+
+        // HOTEN: 1..50
+        if (hoten.length === 0) {
+          err("hoten", "HOTEN không được để trống.");
+          ok = false;
+        } else err("hoten");
+
+        // NGAYSINH: hợp lệ & không lớn hơn hôm nay
+        const d = ngaysinh ? new Date(ngaysinh) : null;
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        if (!d || isNaN(d.getTime()) || d > today) {
+          err("ngaysinh", "Ngày sinh không hợp lệ hoặc lớn hơn hôm nay.");
+          ok = false;
+        } else err("ngaysinh");
+
+        // DIACHI: 1..150
+        if (diachi.length === 0) {
+          err("diachi", "DIACHI không được để trống.");
+          ok = false;
+        } else err("diachi");
+
+        // LOP: 6 ký tự chữ/số
+        if (!/^[A-Z0-9]{6}$/.test(lop)) {
+          err("lop", "LOP phải đúng 6 ký tự chữ/số.");
+          ok = false;
+        } else err("lop");
+
+        // DIEMTOAN: số thực 0..10
+        const score = Number(diem);
+        if (!Number.isFinite(score) || score < 0 || score > 10) {
+          err("diemtoan", "Điểm phải là số thực từ 0 đến 10.");
+          ok = false;
+        } else err("diemtoan");
+
+        // ghi lại giá trị chuẩn hoá
+        f.mahs.value = mahs;
+        f.lop.value = lop;
+
+        return {
+          ok,
+          data: {
+            MAHS: mahs,
+            HOTEN: hoten,
+            NGAYSINH: ngaysinh,
+            DIACHI: diachi,
+            LOP: lop,
+            DIEMTOAN: score,
+          },
+        };
+      }
+
+      f.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const { ok, data } = validate();
+        const box = document.getElementById("preview");
+        if (!ok) {
+          box.hidden = false;
+          box.innerHTML =
+            '<span style="color:#dc2626">Vui lòng sửa các lỗi được đánh dấu ở trên.</span>';
+          return;
+        }
+        box.hidden = false;
+        box.innerHTML = `
+    <div class="ok">Dữ liệu hợp lệ. Xem trước bản ghi HOSO:</div>
+    <ul style="margin:6px 0 0 18px">
+      <li><b>MAHS:</b> ${data.MAHS}</li>
+      <li><b>HOTEN:</b> ${data.HOTEN}</li>
+      <li><b>NGAYSINH:</b> ${data.NGAYSINH}</li>
+      <li><b>DIACHI:</b> ${data.DIACHI}</li>
+      <li><b>LOP:</b> ${data.LOP}</li>
+      <li><b>DIEMTOAN:</b> ${data.DIEMTOAN.toFixed(1)}</li>
+    </ul>
+  `;
+      });
+
+      document.getElementById("btnReset").addEventListener("click", () => {
+        ["mahs", "hoten", "ngaysinh", "diachi", "lop", "diemtoan"].forEach(
+          (id) => err(id, "")
+        );
+        document.getElementById("preview").hidden = true;
+      });
+    </script>
+  </body>
+</html>

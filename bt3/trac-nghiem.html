@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <base href="/CNWAT/" />
+    <title>Bài 3 – 2.2 Thi trắc nghiệm</title>
+
+    <!-- Tái dùng CSS của Bài 2 -->
+    <link rel="stylesheet" href="bt2/css/style.css" />
+
+    <style>
+      /* Ít style bổ sung cho card bài thi */
+      .quiz-card {
+        max-width: 780px;
+        margin: 0 auto;
+      }
+      .quiz-head {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+      .quiz-tabs {
+        display: flex;
+        gap: 8px;
+        margin: 8px 0 16px;
+      }
+      .quiz-tab {
+        padding: 6px 12px;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        background: #f8fafc;
+        cursor: pointer;
+      }
+      .quiz-tab.active {
+        background: #e0e7ff;
+        border-color: #c7d2fe;
+        font-weight: 600;
+      }
+      .quiz-group {
+        margin: 14px 0;
+      }
+      .quiz-group legend {
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+      .quiz-actions {
+        margin-top: 12px;
+        display: flex;
+        gap: 8px;
+      }
+      .btn {
+        padding: 8px 12px;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        background: #f8fafc;
+        cursor: pointer;
+      }
+      .result {
+        margin-top: 12px;
+        font-weight: 600;
+      }
+      .muted {
+        color: #6b7280;
+        font-size: 14px;
+      }
+      .hr {
+        height: 1px;
+        background: #e5e7eb;
+        margin: 12px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <!-- Cột trái: thông tin SV -->
+      <section class="student">
+        <div class="avatar">
+          <img src="bt2/assets/img/me.jpg" alt="Ảnh của tôi" />
+        </div>
+        <div>
+          <h3>Thông tin sinh viên</h3>
+          <p><strong>Họ và tên:</strong> Nguyễn Duy Thảo</p>
+          <p><strong>MSSV:</strong> AT190351</p>
+        </div>
+      </section>
+
+      <!-- Banner video (tuỳ chọn) -->
+      <header class="banner banner--video">
+        <video
+          class="banner-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster="bt2/assets/img/banner-poster.jpg"
+        >
+          <source src="bt2/assets/video/banner.webm" type="video/webm" />
+          <source src="bt2/assets/video/banner.mp4" type="video/mp4" />
+        </video>
+      </header>
+
+      <!-- Menu trái (giữ nguyên cấu trúc của bạn) -->
+      <nav class="menu" aria-label="Menu">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="bt2/index.html">Trang chủ</a></li>
+          <li>
+            <a href="bt2/gioi-thieu-ban-than.html">1.1 Giới thiệu bản thân</a>
+          </li>
+          <li><a href="bt2/bang-diem.html">1.2 Bảng điểm</a></li>
+          <li><a href="bt2/ly-lich.html">1.3 Lý lịch</a></li>
+          <li><a href="bt2/tin-tuc.html">1.4 Tin tức</a></li>
+          <li><a href="bt3/vidu.html">2.1 Ví dụ JS</a></li>
+          <li>
+            <a class="active" href="bt3/trac-nghiem.html"
+              >2.2 Thi trắc nghiệm</a
+            >
+          </li>
+          <li><a href="bt3/nhap-lop.html">2.3 Form LOP</a></li>
+          <li><a href="bt3/nhap-hoso.html">2.4 Hồ sơ (HOSO)</a></li>
+          <li><a href="bt3/form-dang-ky.html">2.5 Form đăng ký</a></li>
+          <li><a href="bt3/danh-sach.html">2.6 Danh sách</a></li>
+          <li><a href="bt3/thuc-don.html">2.7 Thực đơn</a></li>
+          <li><a href="bt3/tab.html">2.8 Tab</a></li>
+          <li><a href="bt3/cay.html">2.9 Cây</a></li>
+          <li><a href="bt3/may-tinh.html">2.10. Máy tính</a></li>
+          <li><a href="bt3/hoat-anh.html">2.11 Hoạt ảnh</a></li>
+          <li><a href="bt3/sap-xep.html">2.12 Sắp xếp</a></li>
+        </ul>
+      </nav>
+
+      <!-- MAIN: bài thi -->
+      <main class="main card quiz-card">
+        <h1>TEST 1 TEST 2</h1>
+        <p class="muted">Question for <span id="testTitle">TEST 1</span></p>
+
+        <!-- Tabs chọn TEST -->
+        <div class="quiz-tabs" role="tablist" aria-label="Chọn bộ câu hỏi">
+          <button
+            class="quiz-tab active"
+            data-test="test1"
+            role="tab"
+            aria-selected="true"
+          >
+            TEST 1
+          </button>
+          <button
+            class="quiz-tab"
+            data-test="test2"
+            role="tab"
+            aria-selected="false"
+          >
+            TEST 2
+          </button>
+        </div>
+
+        <div class="hr"></div>
+
+        <!-- Form câu hỏi sẽ được dựng bằng JS -->
+        <form id="quizForm"></form>
+
+        <div class="quiz-actions">
+          <button type="button" class="btn" id="submitBtn">Submit</button>
+          <button type="button" class="btn" id="resetBtn">Reset</button>
+        </div>
+
+        <p class="result" id="resultText"></p>
+
+        <p class="muted" style="margin-top: 14px">
+          Trong đó khi chọn mỗi TEST X khác nhau sẽ cho bộ câu hỏi tương ứng với
+          TEST X khác nhau.
+        </p>
+      </main>
+
+      <footer class="footer">Thông tin bản quyền – © 2025</footer>
+    </div>
+
+    <script>
+      /* ========= DỮ LIỆU CÂU HỎI =========
+   Mỗi TEST có mảng questions; mỗi question có:
+   - type: 'radio'
+   - name: tên nhóm
+   - legend: tiêu đề câu hỏi
+   - options: [{label, value, correct?}] (có correct để tính điểm minh hoạ)
+*/
+      const tests = {
+        test1: {
+          title: "TEST 1",
+          questions: [
+            {
+              type: "radio",
+              name: "lang",
+              legend: "Please select your favorite Web language:",
+              options: [
+                { label: "HTML", value: "html", correct: true },
+                { label: "CSS", value: "css" },
+                { label: "JavaScript", value: "js" },
+              ],
+            },
+            {
+              type: "radio",
+              name: "age",
+              legend: "Please select your age:",
+              options: [
+                { label: "0 - 30", value: "0-30", correct: true },
+                { label: "31 - 60", value: "31-60" },
+                { label: "61 - 100", value: "61-100" },
+              ],
+            },
+          ],
+        },
+        test2: {
+          title: "TEST 2",
+          questions: [
+            {
+              type: "radio",
+              name: "topic",
+              legend: "Bạn thích mảng nào hơn?",
+              options: [
+                { label: "Frontend (HTML/CSS)", value: "fe" },
+                { label: "JavaScript/Logic", value: "js", correct: true },
+                { label: "Bảo mật Web (OWASP)", value: "sec" },
+              ],
+            },
+            {
+              type: "radio",
+              name: "exp",
+              legend: "Kinh nghiệm lập trình của bạn:",
+              options: [
+                { label: "Dưới 1 năm", value: "<1" },
+                { label: "1–3 năm", value: "1-3", correct: true },
+                { label: "Trên 3 năm", value: ">3" },
+              ],
+            },
+          ],
+        },
+      };
+
+      const quizForm = document.getElementById("quizForm");
+      const testTitle = document.getElementById("testTitle");
+      const resultText = document.getElementById("resultText");
+
+      let currentTest = "test1";
+
+      function renderForm() {
+        const t = tests[currentTest];
+        testTitle.textContent = t.title;
+
+        quizForm.innerHTML = t.questions
+          .map(
+            (q, idx) => `
+    <fieldset class="quiz-group">
+      <legend>${q.legend}</legend>
+      ${q.options
+        .map(
+          (op, i) => `
+        <label style="display:flex;gap:8px;align-items:center;margin:4px 0;">
+          <input type="radio" name="${q.name}" value="${op.value}">
+          <span>${op.label}</span>
+        </label>
+      `
+        )
+        .join("")}
+    </fieldset>
+  `
+          )
+          .join("");
+        resultText.textContent = "";
+      }
+
+      function setActiveTab(btn) {
+        document.querySelectorAll(".quiz-tab").forEach((b) => {
+          const active = b === btn;
+          b.classList.toggle("active", active);
+          b.setAttribute("aria-selected", active ? "true" : "false");
+        });
+      }
+
+      document.querySelectorAll(".quiz-tab").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          currentTest = btn.dataset.test;
+          setActiveTab(btn);
+          renderForm();
+        });
+      });
+
+      // Nộp bài: chấm điểm minh hoạ (đếm số radio đúng được chọn)
+      document.getElementById("submitBtn").addEventListener("click", () => {
+        const t = tests[currentTest];
+        let score = 0,
+          total = 0;
+
+        t.questions.forEach((q) => {
+          const sel = quizForm.querySelector(`input[name="${q.name}"]:checked`);
+          const correctValue = (q.options.find((o) => o.correct) || {}).value;
+          if (correctValue) total++;
+          if (sel && sel.value === correctValue) score++;
+        });
+
+        resultText.textContent = `Kết quả: ${score}/${total} câu đúng (${tests[currentTest].title}).`;
+      });
+
+      // Reset lựa chọn
+      document.getElementById("resetBtn").addEventListener("click", () => {
+        quizForm.reset();
+        resultText.textContent = "";
+      });
+
+      // Lần đầu hiển thị
+      renderForm();
+    </script>
+  </body>
+</html>

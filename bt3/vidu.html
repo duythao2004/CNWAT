@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <base href="/CNWAT/" />
+    <title>Bài 3 – Ví dụ JS</title>
+    <!-- tái dùng CSS bài 2 -->
+    <link rel="stylesheet" href="bt2/css/style.css" />
+    <style>
+      .ex-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 0 0 12px;
+        padding: 0;
+        list-style: none;
+      }
+      .ex-links a {
+        display: inline-block;
+        padding: 6px 10px;
+        border: 1px solid #e5e7eb;
+        border-radius: 999px;
+        text-decoration: none;
+      }
+      .ex-links a.active {
+        background: #e0e7ff;
+        border-color: #c7d2fe;
+        font-weight: 600;
+      }
+      .kq {
+        margin-top: 12px;
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .btn {
+        padding: 6px 10px;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        background: #f8fafc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <!-- Cột trái: GIỮ NGUYÊN y như Bài 2 -->
+      <section class="student">
+        <div class="avatar">
+          <img src="bt2/assets/img/me.jpg" alt="Ảnh của tôi" />
+        </div>
+        <div>
+          <h3>Thông tin sinh viên</h3>
+          <p><strong>Họ và tên:</strong> Nguyễn Duy Thảo</p>
+          <p><strong>MSSV:</strong> AT190351</p>
+        </div>
+      </section>
+
+      <header class="banner banner--video">
+        <video
+          class="banner-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster="bt2/assets/img/banner-poster.jpg"
+        >
+          <source src="bt2/assets/video/banner.webm" type="video/webm" />
+          <source src="bt2/assets/video/banner.mp4" type="video/mp4" />
+          Trình duyệt của bạn không hỗ trợ video.
+        </video>
+      </header>
+
+      <!-- MENU TRÁI: GIỮ Y NGUYÊN (các bài bạn đã làm) -->
+      <nav class="menu" aria-label="Menu">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="bt2/index.html">Trang chủ</a></li>
+          <li>
+            <a href="bt2/gioi-thieu-ban-than.html">1.1 Giới thiệu bản thân</a>
+          </li>
+          <li><a href="bt2/bang-diem.html">1.2 Bảng điểm</a></li>
+          <li><a href="bt2/ly-lich.html">1.3 Lý lịch</a></li>
+          <li><a href="bt2/tin-tuc.html">1.4 Tin tức</a></li>
+          <li>
+            <a class="active" href="bt3/vidu.html">2.1 Ví dụ JS</a>
+          </li>
+          <li><a href="bt3/trac-nghiem.html">2.2 Thi trắc nghiệm</a></li>
+          <li><a href="bt3/nhap-lop.html">2.3 Form LOP</a></li>
+          <li><a href="bt3/nhap-hoso.html">2.4 Hồ sơ (HOSO)</a></li>
+          <li><a href="bt3/form-dang-ky.html">2.5 Form đăng ký</a></li>
+          <li><a href="bt3/danh-sach.html">2.6 Danh sách</a></li>
+          <li><a href="bt3/thuc-don.html">2.7 Thực đơn</a></li>
+          <li><a href="bt3/tab.html">2.8 Tab</a></li>
+          <li><a href="bt3/cay.html">2.9 Cây</a></li>
+          <li><a href="bt3/may-tinh.html">2.10. Máy tính</a></li>
+          <li><a href="bt3/hoat-anh.html">2.11 Hoạt ảnh</a></li>
+          <li><a href="bt3/sap-xep.html">2.12 Sắp xếp</a></li>
+        </ul>
+      </nav>
+
+      <!-- MAIN: chỉ phần này thay đổi theo ví dụ được chọn -->
+      <main class="main card" aria-live="polite">
+        <h2>Các ví dụ mẫu (chọn 1 ví dụ bên dưới)</h2>
+
+        <!-- 14 link ví dụ NẰM TRONG MAIN -->
+        <ul id="exLinks" class="ex-links">
+          <li><a href="bt3/vidu.html#ex1">1. Sử dụng biến</a></li>
+          <li><a href="bt3/vidu.html#ex2">2. Textbox & chương trình con</a></li>
+          <li><a href="bt3/vidu.html#ex3">3. IF</a></li>
+          <li><a href="bt3/vidu.html#ex4">4. Date (chào theo giờ)</a></li>
+          <li><a href="bt3/vidu.html#ex5">5. switch</a></li>
+          <li><a href="bt3/vidu.html#ex6">6. confirm()</a></li>
+          <li><a href="bt3/vidu.html#ex7">7. prompt()</a></li>
+          <li><a href="bt3/vidu.html#ex8">8. String</a></li>
+          <li><a href="bt3/vidu.html#ex9">9. Array</a></li>
+          <li><a href="bt3/vidu.html#ex10">10. setTimeout alert</a></li>
+          <li><a href="bt3/vidu.html#ex11">11. setTimeout text</a></li>
+          <li><a href="bt3/vidu.html#ex12">12. Đồng hồ</a></li>
+          <li><a href="bt3/vidu.html#ex13">13. Hiệu ứng ảnh</a></li>
+          <li><a href="bt3/vidu.html#ex14">14. Select → Option</a></li>
+        </ul>
+
+        <!-- nơi hiển thị nội dung ví dụ -->
+        <section id="app"></section>
+      </main>
+
+      <footer class="footer">Thông tin của tôi – © 2025</footer>
+    </div>
+
+    <script>
+      /* ====== các “mẫu HTML” cho 14 ví dụ (đã SỬA) ====== */
+      const tpl = {
+        ex1: () => `
+    <h3>Ví dụ 1: Sử dụng biến</h3>
+    <button class="btn" data-act="run1">Chạy thử</button>
+    <ol id="out" class="kq"></ol>
+  `,
+        ex2: () => `
+    <h3>Ví dụ 2: Textbox & chương trình con</h3>
+    <input id="T1" placeholder="Nhập số bất kỳ">
+    <button class="btn" data-act="run2">Chạy thử</button>
+    <p id="kq" class="kq"></p>
+  `,
+        ex3: () => `
+    <h3>Ví dụ 3: IF chẵn/lẻ</h3>
+    <input id="num" type="number" placeholder="Nhập số">
+    <button class="btn" data-act="run3">Chạy thử</button>
+    <p id="kq" class="kq"></p>
+  `,
+        ex4: () => `
+    <h3>Ví dụ 4: Chào theo giờ</h3>
+    <button class="btn" data-act="run4">Chạy</button>
+    <p id="msg" class="kq"></p>
+  `,
+        ex5: () => `
+    <h3>Ví dụ 5: switch(getDay)</h3>
+    <button class="btn" data-act="run5">Hôm nay là…</button>
+    <p id="d" class="kq"></p>
+  `,
+        ex6: () => `
+    <h3>Ví dụ 6: confirm()</h3>
+    <button class="btn" data-act="run6">Hiển thị confirm</button>
+    <p id="kq" class="kq"></p>
+  `,
+        ex7: () => `
+    <h3>Ví dụ 7: prompt()</h3>
+    <button class="btn" data-act="run7">Nhập tên</button>
+    <p id="kq" class="kq"></p>
+  `,
+        ex8: () => `
+    <h3>Ví dụ 8: String</h3>
+    <button class="btn" data-act="run8">Chạy</button>
+    <div id="out" class="kq mono"></div>
+  `,
+        ex9: () => `
+    <h3>Ví dụ 9: Array</h3>
+    <button class="btn" data-act="run9">Chạy</button>
+    <div id="out" class="kq mono"></div>
+  `,
+        ex10: () => `
+    <h3>Ví dụ 10: setTimeout alert</h3>
+    <button class="btn" data-act="run10">Bấm để 5s sau hiện alert</button>
+  `,
+        ex11: () => `
+    <h3>Ví dụ 11: setTimeout text</h3>
+    <input id="txt" placeholder="Sẽ được cập nhật...">
+    <button class="btn" data-act="run11">Chạy</button>
+  `,
+        ex12: () => `
+    <h3>Ví dụ 12: Đồng hồ</h3>
+    <div id="clock" class="kq mono" style="font-size:24px;font-weight:700"></div>
+  `,
+        ex13: () => `
+    <h3>Ví dụ 13: Hiệu ứng ảnh</h3>
+    <p>Đưa chuột vào ảnh để đổi.</p>
+    <img id="pic" src="bt2/assets/img/news-1.jpg" width="260"
+         onmouseover="this.src='bt2/assets/img/news-2.jpg'"
+         onmouseout="this.src='bt2/assets/img/news-1.jpg'">
+  `,
+        ex14: () => `
+    <h3>Ví dụ 14: Select → Option</h3>
+    <select id="sel">
+      <option value="">-- chọn người --</option>
+      <option value="lam">Lê Thanh Lâm</option>
+      <option value="duc">Nguyễn Đình Minh Đức</option>
+      <option value="thinh">Trần Văn Thịnh</option>
+      <option value="hien">Đỗ Thế Hiền</option>
+      <option value="daotao">Phòng Đào tạo</option>
+    </select>
+    <input id="phone" placeholder="Số điện thoại" disabled>
+  `,
+      };
+
+      /* ====== router theo hash (#ex1..#ex14) – chỉ thay NỘI DUNG MAIN ====== */
+      function render() {
+        const id = (location.hash || "#ex1").slice(1);
+        const html = tpl[id] ? tpl[id]() : `<p>Không có ví dụ: ${id}</p>`;
+        app.innerHTML = html;
+
+        // đánh dấu link đang active
+        document.querySelectorAll("#exLinks a").forEach((a) => {
+          a.classList.toggle("active", a.getAttribute("href") === "#" + id);
+        });
+
+        // ex12: đồng hồ
+        if (id === "ex12") {
+          const pad = (n) => (n < 10 ? "0" + n : n);
+          (function tick() {
+            const d = new Date();
+            const el = document.getElementById("clock");
+            if (el)
+              el.textContent = `${pad(d.getHours())}:${pad(
+                d.getMinutes()
+              )}:${pad(d.getSeconds())}`;
+            setTimeout(tick, 500);
+          })();
+        }
+      }
+      window.addEventListener("hashchange", render);
+      window.addEventListener("DOMContentLoaded", render);
+
+      /* ====== bắt các nút Chạy trong từng ví dụ ====== */
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-act]");
+        if (!btn) return;
+        const act = btn.dataset.act;
+
+        if (act === "run1") {
+          const name = "Nguyễn Duy Thảo",
+            mssv = "AT190351";
+          let a = 10,
+            b = 20;
+          const rs = [
+            `a=${a}, b=${b}`,
+            `a+b=${a + b}`,
+            `b-a=${b - a}`,
+            `a*b=${a * b}`,
+            `Xin chào ${name} (${mssv})!`,
+            `PI≈${Math.PI.toFixed(2)}`,
+          ];
+          out.innerHTML = rs.map((s) => `<li><code>${s}</code></li>`).join("");
+        }
+        if (act === "run2") {
+          const v = document.getElementById("T1").value || "";
+          alert("Số bạn vừa nhập là: " + v);
+          kq.textContent = "Đã nhập: " + v;
+        }
+        if (act === "run3") {
+          const a = Number(document.getElementById("num").value);
+          kq.textContent = Number.isNaN(a)
+            ? "Hãy nhập số"
+            : a % 2 === 0
+            ? `${a} là số chẵn`
+            : `${a} là số lẻ`;
+        }
+        if (act === "run4") {
+          const h = new Date().getHours();
+          msg.innerHTML =
+            h < 10
+              ? "<b>Good morning</b>"
+              : h < 16
+              ? "<b>Good day</b>"
+              : "<b>Hello World!</b>";
+        }
+        if (act === "run5") {
+          const day = new Date().getDay();
+          d.textContent =
+            day === 0
+              ? "Sunday"
+              : day === 5
+              ? "Friday"
+              : day === 6
+              ? "Saturday"
+              : "Chúc đầu tuần vui vẻ!";
+        }
+        if (act === "run6") {
+          const ok = confirm("Press a button");
+          kq.textContent = ok ? "You pressed OK!" : "You pressed Cancel!";
+        }
+        if (act === "run7") {
+          const name = prompt("VUI LÒNG NHẬP TÊN CỦA BẠN", "LE THANH LAM");
+          if (name)
+            kq.textContent = "XIN CHÀO " + name + "! How are you today?";
+        }
+        if (act === "run8") {
+          const s = "Hello world!";
+          out.innerHTML = [
+            s.indexOf("Hello"),
+            s.indexOf("World"),
+            s.indexOf("world"),
+            s.toUpperCase(),
+            s.length,
+            s.replace("w", "W"),
+          ].join("<br>");
+        }
+        if (act === "run9") {
+          const cars = ["Saab", "Volvo", "BMW"];
+          out.innerHTML = cars.join("<br>");
+        }
+        if (act === "run10") {
+          setTimeout(() => alert("5 seconds!"), 5000);
+        }
+        if (act === "run11") {
+          const t = document.getElementById("txt");
+          setTimeout(() => (t.value = "2 seconds!"), 2000);
+          setTimeout(() => (t.value = "4 seconds!"), 4000);
+          setTimeout(() => (t.value = "6 seconds!"), 6000);
+        }
+      });
+
+      // mở mặc định ex1 nếu không có hash
+      if (!location.hash) location.hash = "#ex1";
+    </script>
+  </body>
+</html>

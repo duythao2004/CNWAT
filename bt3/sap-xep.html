@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <base href="/CNWAT/" />
+    <title>Bài 3 – 2.12 Sắp xếp & Tìm kiếm</title>
+
+    <link rel="stylesheet" href="bt2/css/style.css" />
+    <style>
+      .toolbar {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .btn {
+        padding: 6px 10px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        background: #f8fafc;
+        font-weight: 600;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background: #e9f6ff;
+      }
+      .input {
+        height: 34px;
+        padding: 0 10px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        min-width: 240px;
+      }
+      table.tbl {
+        border-collapse: collapse;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        overflow: hidden;
+        width: 420px;
+      }
+      .tbl th,
+      .tbl td {
+        border: 1px solid #e5e7eb;
+        padding: 6px 8px;
+      }
+      .tbl th {
+        background: #f8fafc;
+        text-align: left;
+        position: relative;
+        user-select: none;
+      }
+      .tbl th.sortable {
+        cursor: pointer;
+      }
+      /* mũi tên lên/xuống ở cột đang sắp xếp */
+      .tbl th.sort-asc::after,
+      .tbl th.sort-desc::after {
+        content: "";
+        border: 5px solid transparent;
+        position: absolute;
+        right: 8px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .tbl th.sort-asc::after {
+        border-bottom-color: #111827;
+        margin-top: -3px;
+      }
+      .tbl th.sort-desc::after {
+        border-top-color: #111827;
+        margin-top: 3px;
+      }
+      /* color hàng chẵn/lẻ giống đề */
+      .tbl tbody tr:nth-child(odd) {
+        background: #fbfefc;
+      }
+      .tbl tbody tr:nth-child(even) {
+        background: #eefbf1;
+      }
+      mark {
+        background: #fde68a;
+        padding: 0 1px;
+      }
+      .muted {
+        color: #6b7280;
+        font-size: 13px;
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <!-- cột trái tái dùng -->
+      <section class="student">
+        <div class="avatar"><img src="bt2/assets/img/me.jpg" alt="" /></div>
+        <div>
+          <h3>Thông tin sinh viên</h3>
+          <p><strong>Họ và tên:</strong> Nguyễn Duy Thảo</p>
+          <p><strong>MSSV:</strong> AT190351</p>
+        </div>
+      </section>
+
+      <header class="banner banner--video">
+        <video
+          class="banner-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster="bt2/assets/img/banner-poster.jpg"
+        >
+          <source src="bt2/assets/video/banner.webm" type="video/webm" />
+          <source src="bt2/assets/video/banner.mp4" type="video/mp4" />
+        </video>
+      </header>
+
+      <nav class="menu" aria-label="Menu">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="bt2/index.html">Trang chủ</a></li>
+          <li>
+            <a href="bt2/gioi-thieu-ban-than.html">1.1 Giới thiệu bản thân</a>
+          </li>
+          <li><a href="bt2/bang-diem.html">1.2 Bảng điểm</a></li>
+          <li><a href="bt2/ly-lich.html">1.3 Lý lịch</a></li>
+          <li><a href="bt2/tin-tuc.html">1.4 Tin tức</a></li>
+          <li><a href="bt3/vidu.html">2.1 Ví dụ JS</a></li>
+          <li><a href="bt3/trac-nghiem.html">2.2 Thi trắc nghiệm</a></li>
+          <li><a href="bt3/nhap-lop.html">2.3 Nhập LOP</a></li>
+          <li><a href="bt3/nhap-hoso.html">2.4 Hồ sơ</a></li>
+          <li><a href="bt3/form-dang-ky.html">2.5 Form đăng ký</a></li>
+          <li><a href="bt3/danh-sach.html">2.6 Danh sách</a></li>
+          <li><a href="bt3/thuc-don.html">2.7 Thực đơn</a></li>
+          <li><a href="bt3/tab.html">2.8 Tab</a></li>
+          <li><a href="bt3/cay.html">2.9 Cây</a></li>
+          <li><a href="bt3/may-tinh.html">2.10. Máy tính</a></li>
+          <li><a href="bt3/hoat-anh.html">2.11 Hoạt ảnh</a></li>
+          <li><a class="active" href="bt3/sap-xep.html">2.12 Sắp xếp</a></li>
+        </ul>
+      </nav>
+
+      <main class="main card">
+        <h1>2.12 Sắp xếp & Tìm kiếm</h1>
+
+        <div class="toolbar">
+          <button id="btnSortName" class="btn">
+            Sắp xếp theo tên sản phẩm
+          </button>
+          <input
+            id="q"
+            class="input"
+            type="text"
+            placeholder="Nhập các từ cần tìm"
+          />
+        </div>
+
+        <table class="tbl" id="tbl">
+          <thead>
+            <tr>
+              <th style="width: 40px">TT</th>
+              <th class="sortable" data-key="ma" style="width: 90px">
+                Mã sản phẩm
+              </th>
+              <th class="sortable" data-key="ten">Tên sản phẩm</th>
+            </tr>
+          </thead>
+          <tbody id="tb">
+            <!-- dữ liệu mẫu -->
+            <tr>
+              <td class="stt">1</td>
+              <td>SP001</td>
+              <td>Máy giặt</td>
+            </tr>
+            <tr>
+              <td class="stt">2</td>
+              <td>SP002</td>
+              <td>Bếp đa năng</td>
+            </tr>
+            <tr>
+              <td class="stt">3</td>
+              <td>SP003</td>
+              <td>Lò sưởi</td>
+            </tr>
+            <tr>
+              <td class="stt">4</td>
+              <td>SP004</td>
+              <td>Điều hoà nhiệt độ</td>
+            </tr>
+            <tr>
+              <td class="stt">5</td>
+              <td>SP005</td>
+              <td>Tủ lạnh</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p class="muted">
+          • Click tiêu đề cột <b>Mã sản phẩm</b> hoặc <b>Tên sản phẩm</b> để sắp
+          xếp tăng/giảm (có mũi tên chỉ chiều). • Gõ vào ô tìm kiếm để lọc theo
+          từ khoá, các từ khớp sẽ được <b>tô đậm</b>, các dòng không khớp sẽ
+          được <b>ẩn</b>.
+        </p>
+      </main>
+
+      <footer class="footer">Thông tin bản quyền – © 2025</footer>
+    </div>
+
+    <script>
+      // ---- Lấy dữ liệu từ bảng thành mảng để thao tác ----
+      const tb = document.getElementById("tb");
+      const q = document.getElementById("q");
+      const btnSortName = document.getElementById("btnSortName");
+      const ths = [...document.querySelectorAll("th.sortable")];
+      let rows = [...tb.querySelectorAll("tr")].map((tr) => ({
+        tr,
+        ma: tr.children[1].textContent.trim(),
+        ten: tr.children[2].textContent.trim(),
+      }));
+
+      let sortState = { key: null, dir: "asc" }; // asc | desc
+
+      function render(newRows) {
+        // cập nhật lại TT
+        newRows.forEach(
+          (r, i) => (r.tr.querySelector(".stt").textContent = i + 1)
+        );
+        // clear và gắn lại
+        tb.innerHTML = "";
+        newRows.forEach((r) => tb.appendChild(r.tr));
+      }
+
+      function clearSortIndicators() {
+        ths.forEach((th) => th.classList.remove("sort-asc", "sort-desc"));
+      }
+
+      function sortBy(key, toggle = true) {
+        if (toggle) {
+          if (sortState.key === key) {
+            sortState.dir = sortState.dir === "asc" ? "desc" : "asc";
+          } else {
+            sortState.key = key;
+            sortState.dir = "asc";
+          }
+        } else {
+          sortState.key = key;
+          sortState.dir = "asc";
+        }
+
+        // cập nhật mũi tên
+        clearSortIndicators();
+        const th = ths.find((t) => t.dataset.key === key);
+        th.classList.add(sortState.dir === "asc" ? "sort-asc" : "sort-desc");
+
+        const dir = sortState.dir === "asc" ? 1 : -1;
+        rows.sort((a, b) => {
+          const A = a[key].toLocaleLowerCase();
+          const B = b[key].toLocaleLowerCase();
+          if (A < B) return -1 * dir;
+          if (A > B) return 1 * dir;
+          return 0;
+        });
+
+        render(rows);
+        applyFilter(q.value); // giữ kết quả lọc/hightlight nếu đang tìm
+      }
+
+      // Nút "Sắp xếp theo tên sản phẩm"
+      btnSortName.addEventListener("click", () => sortBy("ten", false));
+
+      // Click tiêu đề cột để sắp xếp
+      ths.forEach((th) => {
+        th.addEventListener("click", () => sortBy(th.dataset.key, true));
+        th.title = "Nhấn để sắp xếp";
+      });
+
+      // ---- Tìm kiếm + Highlight ----
+      function escapeReg(s) {
+        return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      }
+
+      function highlightCell(td, terms) {
+        const text = td.textContent;
+        if (!terms.length) {
+          td.innerHTML = text;
+          return;
+        }
+        const pattern = terms.map((t) => escapeReg(t)).join("|");
+        const re = new RegExp(`(${pattern})`, "gi");
+        td.innerHTML = text.replace(re, "<mark>$1</mark>");
+      }
+
+      function applyFilter(query) {
+        const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean);
+        rows.forEach((r) => {
+          const hay = (r.ma + " " + r.ten).toLowerCase();
+          const ok = terms.every((t) => hay.includes(t));
+          r.tr.style.display = ok ? "" : "none";
+          // tô đậm chỉ khi hiển thị
+          if (ok) {
+            highlightCell(r.tr.children[1], terms);
+            highlightCell(r.tr.children[2], terms);
+          } else {
+            r.tr.children[1].innerHTML = r.ma;
+            r.tr.children[2].innerHTML = r.ten;
+          }
+        });
+      }
+
+      q.addEventListener("input", (e) => applyFilter(e.target.value));
+
+      // Khởi tạo: sắp xếp mặc định theo TT hiện có (không đặt mũi tên)
+      render(rows);
+    </script>
+  </body>
+</html>
