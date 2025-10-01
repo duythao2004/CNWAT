@@ -6,37 +6,12 @@
     <base href="/CNWAT/" />
     <title>Bài 3 – 2.2 Thi trắc nghiệm</title>
 
-    <!-- Tái dùng CSS của Bài 2 -->
+    <!-- Tái dùng CSS bài 2 của bạn -->
     <link rel="stylesheet" href="bt2/css/style.css" />
-
     <style>
-      /* Ít style bổ sung cho card bài thi */
       .quiz-card {
         max-width: 780px;
         margin: 0 auto;
-      }
-      .quiz-head {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        margin-bottom: 8px;
-      }
-      .quiz-tabs {
-        display: flex;
-        gap: 8px;
-        margin: 8px 0 16px;
-      }
-      .quiz-tab {
-        padding: 6px 12px;
-        border: 1px solid #e5e7eb;
-        border-radius: 10px;
-        background: #f8fafc;
-        cursor: pointer;
-      }
-      .quiz-tab.active {
-        background: #e0e7ff;
-        border-color: #c7d2fe;
-        font-weight: 600;
       }
       .quiz-group {
         margin: 14px 0;
@@ -49,6 +24,7 @@
         margin-top: 12px;
         display: flex;
         gap: 8px;
+        flex-wrap: wrap;
       }
       .btn {
         padding: 8px 12px;
@@ -70,11 +46,17 @@
         background: #e5e7eb;
         margin: 12px 0;
       }
+      label.inline {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        margin: 4px 0;
+      }
     </style>
   </head>
   <body>
     <div class="wrap">
-      <!-- Cột trái: thông tin SV -->
+      <!-- Cột trái -->
       <section class="student">
         <div class="avatar">
           <img src="bt2/assets/img/me.jpg" alt="Ảnh của tôi" />
@@ -86,7 +68,7 @@
         </div>
       </section>
 
-      <!-- Banner video (tuỳ chọn) -->
+      <!-- Banner (tuỳ chọn) -->
       <header class="banner banner--video">
         <video
           class="banner-video"
@@ -101,7 +83,7 @@
         </video>
       </header>
 
-      <!-- Menu trái (giữ nguyên cấu trúc của bạn) -->
+      <!-- Menu trái -->
       <nav class="menu" aria-label="Menu">
         <h4>Menu</h4>
         <ul>
@@ -131,185 +113,446 @@
         </ul>
       </nav>
 
-      <!-- MAIN: bài thi -->
+      <!-- MAIN -->
       <main class="main card quiz-card">
-        <h1>TEST 1 TEST 2</h1>
-        <p class="muted">Question for <span id="testTitle">TEST 1</span></p>
+        <h1>
+          Thi trắc nghiệm –
+          <span
+            style="
+              background: #e0e7ff;
+              border: 1px solid #c7d2fe;
+              border-radius: 999px;
+              padding: 2px 8px;
+            "
+            >TEST 1</span
+          >
+        </h1>
+        <p class="muted">
+          Chọn 1 phương án ở mỗi nhóm bên dưới. <strong>5 câu hỏi</strong> phù
+          hợp.
+        </p>
 
-        <!-- Tabs chọn TEST -->
-        <div class="quiz-tabs" role="tablist" aria-label="Chọn bộ câu hỏi">
-          <button
-            class="quiz-tab active"
-            data-test="test1"
-            role="tab"
-            aria-selected="true"
-          >
-            TEST 1
-          </button>
-          <button
-            class="quiz-tab"
-            data-test="test2"
-            role="tab"
-            aria-selected="false"
-          >
-            TEST 2
-          </button>
-        </div>
+        <!-- NHÓM LỰA CHỌN (3 × 3) -->
+        <form
+          id="selectorForm"
+          class="card"
+          style="padding: 12px; border: 1px solid #e5e7eb; border-radius: 10px"
+        >
+          <fieldset class="quiz-group">
+            <legend>Please select your favorite Web language:</legend>
+            <label class="inline"
+              ><input type="radio" name="lang" value="html" />
+              <span>HTML</span></label
+            >
+            <label class="inline"
+              ><input type="radio" name="lang" value="css" />
+              <span>CSS</span></label
+            >
+            <label class="inline"
+              ><input type="radio" name="lang" value="js" />
+              <span>JavaScript</span></label
+            >
+          </fieldset>
+
+          <fieldset class="quiz-group">
+            <legend>Please select your age:</legend>
+            <label class="inline"
+              ><input type="radio" name="age" value="0-30" />
+              <span>0 - 30</span></label
+            >
+            <label class="inline"
+              ><input type="radio" name="age" value="31-60" />
+              <span>31 - 60</span></label
+            >
+            <label class="inline"
+              ><input type="radio" name="age" value="61-100" />
+              <span>61 - 100</span></label
+            >
+          </fieldset>
+
+          <div class="quiz-actions">
+            <button type="button" id="loadBtn" class="btn">
+              Tải 5 câu hỏi
+            </button>
+            <button type="button" id="clearBtn" class="btn">
+              Xóa lựa chọn
+            </button>
+          </div>
+        </form>
 
         <div class="hr"></div>
 
-        <!-- Form câu hỏi sẽ được dựng bằng JS -->
+        <!-- CÂU HỎI SẼ ĐƯỢC SINH TẠI ĐÂY -->
         <form id="quizForm"></form>
 
         <div class="quiz-actions">
-          <button type="button" class="btn" id="submitBtn">Submit</button>
+          <button type="button" class="btn" id="submitBtn">Nộp</button>
           <button type="button" class="btn" id="resetBtn">Reset</button>
         </div>
 
         <p class="result" id="resultText"></p>
-
-        <p class="muted" style="margin-top: 14px">
-          Trong đó khi chọn mỗi TEST X khác nhau sẽ cho bộ câu hỏi tương ứng với
-          TEST X khác nhau.
-        </p>
       </main>
 
       <footer class="footer">Thông tin bản quyền – © 2025</footer>
     </div>
 
     <script>
-      /* ========= DỮ LIỆU CÂU HỎI =========
-   Mỗi TEST có mảng questions; mỗi question có:
-   - type: 'radio'
-   - name: tên nhóm
-   - legend: tiêu đề câu hỏi
-   - options: [{label, value, correct?}] (có correct để tính điểm minh hoạ)
-*/
-      const tests = {
-        test1: {
-          title: "TEST 1",
-          questions: [
-            {
-              type: "radio",
-              name: "lang",
-              legend: "Please select your favorite Web language:",
-              options: [
-                { label: "HTML", value: "html", correct: true },
-                { label: "CSS", value: "css" },
-                { label: "JavaScript", value: "js" },
-              ],
-            },
-            {
-              type: "radio",
-              name: "age",
-              legend: "Please select your age:",
-              options: [
-                { label: "0 - 30", value: "0-30", correct: true },
-                { label: "31 - 60", value: "31-60" },
-                { label: "61 - 100", value: "61-100" },
-              ],
-            },
-          ],
-        },
-        test2: {
-          title: "TEST 2",
-          questions: [
-            {
-              type: "radio",
-              name: "topic",
-              legend: "Bạn thích mảng nào hơn?",
-              options: [
-                { label: "Frontend (HTML/CSS)", value: "fe" },
-                { label: "JavaScript/Logic", value: "js", correct: true },
-                { label: "Bảo mật Web (OWASP)", value: "sec" },
-              ],
-            },
-            {
-              type: "radio",
-              name: "exp",
-              legend: "Kinh nghiệm lập trình của bạn:",
-              options: [
-                { label: "Dưới 1 năm", value: "<1" },
-                { label: "1–3 năm", value: "1-3", correct: true },
-                { label: "Trên 3 năm", value: ">3" },
-              ],
-            },
-          ],
-        },
+      /* =========================
+       NGÂN HÀNG CÂU HỎI 3×3
+       key = "${lang}_${age}"
+       Mỗi key có 5 câu, mỗi câu có 1 đáp án đúng (correct:true)
+    ==========================*/
+      const bank = {
+        // HTML × 3
+        "html_0-30": [
+          q("Thẻ nào tạo liên kết?", [
+            o("<a>", "a", true),
+            o("<link>", "link"),
+            o("<href>", "href"),
+          ]),
+          q("Thuộc tính văn bản thay thế của ảnh?", [
+            o("alt", "alt", true),
+            o("src", "src"),
+            o("title", "title"),
+          ]),
+          q("Thẻ semantic cho vùng điều hướng?", [
+            o("<nav>", "nav", true),
+            o("<section>", "section"),
+            o("<aside>", "aside"),
+          ]),
+          q("Thẻ tiêu đề lớn nhất?", [
+            o("<h1>", "h1", true),
+            o("<h2>", "h2"),
+            o("<header>", "header"),
+          ]),
+          q("Phần tử inline phổ biến là:", [
+            o("<span>", "span", true),
+            o("<div>", "div"),
+            o("<section>", "sec"),
+          ]),
+        ],
+        "html_31-60": [
+          q("Thẻ chèn hình ảnh?", [
+            o("<img>", "img", true),
+            o("<image>", "image"),
+            o("<figure>", "figure"),
+          ]),
+          q("Cặp thẻ nhấn mạnh có ý nghĩa ngữ nghĩa hơn?", [
+            o("<b>", "b"),
+            o("<strong>", "strong", true),
+            o("<em>", "em"),
+          ]),
+          q("Danh sách có thứ tự dùng:", [
+            o("<ol>", "ol", true),
+            o("<ul>", "ul"),
+            o("<dl>", "dl"),
+          ]),
+          q("Thuộc tính mở liên kết tab mới:", [
+            o('target="_blank"', "t", true),
+            o('referrer="new"', "r"),
+            o('open="1"', "o"),
+          ]),
+          q("Thuộc tính bắt buộc của <img> nên có:", [
+            o("alt", "alt", true),
+            o("role", "role"),
+            o("style", "style"),
+          ]),
+        ],
+        "html_61-100": [
+          q("Thẻ bao phần đầu trang:", [
+            o("<header>", "header", true),
+            o("<head>", "head"),
+            o("<top>", "top"),
+          ]),
+          q("Gói nội dung độc lập (bài viết):", [
+            o("<article>", "article", true),
+            o("<section>", "section"),
+            o("<aside>", "aside"),
+          ]),
+          q("Bảng dùng:", [
+            o("<table>", "table", true),
+            o("<grid>", "grid"),
+            o("<tab>", "tab"),
+          ]),
+          q("Thuộc tính mô tả cho liên kết:", [
+            o("title", "title", true),
+            o("name", "name"),
+            o("desc", "desc"),
+          ]),
+          q("Thẻ hiển thị code nguồn:", [
+            o("<code>", "code", true),
+            o("<source>", "source"),
+            o("<pre>", "pre"),
+          ]),
+        ],
+
+        // CSS × 3
+        "css_0-30": [
+          q("Đổi màu chữ:", [
+            o("color", "color", true),
+            o("font-color", "fc"),
+            o("text-color", "tc"),
+          ]),
+          q("Chọn phần tử có class='btn':", [
+            o(".btn", "cls", true),
+            o("#btn", "id"),
+            o("btn", "tag"),
+          ]),
+          q("Bo tròn góc:", [
+            o("border-radius", "br", true),
+            o("corner", "co"),
+            o("radius", "ra"),
+          ]),
+          q("Tạo layout 2 cột hiện đại:", [
+            o("flex/grid", "fg", true),
+            o("table", "tb"),
+            o("float", "fl"),
+          ]),
+          q("Độ ưu tiên cao nhất:", [
+            o("!important", "imp", true),
+            o("inline style", "inl"),
+            o("external", "ext"),
+          ]),
+        ],
+        "css_31-60": [
+          q("Màu nền:", [
+            o("background-color", "bg", true),
+            o("back-color", "bc"),
+            o("bgcolor", "bgc"),
+          ]),
+          q("Đơn vị tương đối theo root:", [
+            o("rem", "rem", true),
+            o("px", "px"),
+            o("cm", "cm"),
+          ]),
+          q("Viền nét đứt:", [
+            o("border-style: dashed", "ds", true),
+            o("border: break", "bk"),
+            o("outline-dash", "od"),
+          ]),
+          q("Ẩn phần tử khỏi dòng chảy nhưng giữ chỗ:", [
+            o("visibility: hidden", "vh", true),
+            o("display: none", "dn"),
+            o("opacity: 0", "op0"),
+          ]),
+          q("Thuộc tính canh giữa ngang flex:", [
+            o("justify-content", "jc", true),
+            o("align-items", "ai"),
+            o("place-items", "pi"),
+          ]),
+        ],
+        "css_61-100": [
+          q("Kế thừa thuộc tính thường gặp:", [
+            o("color", "color", true),
+            o("margin", "mg"),
+            o("border", "bd"),
+          ]),
+          q("Box model: thứ tự trong ra ngoài:", [
+            o("content → padding → border → margin", "bm", true),
+            o("content → border → padding → margin", "wb"),
+            o("margin → border → padding → content", "rev"),
+          ]),
+          q("Đặt font chữ:", [
+            o("font-family", "ff", true),
+            o("font-type", "ft"),
+            o("text-font", "tf"),
+          ]),
+          q("Chọn con trực tiếp:", [
+            o("A > B", "child", true),
+            o("A B", "desc"),
+            o("A~B", "sib"),
+          ]),
+          q("Media query đúng:", [
+            o("@media (max-width: 768px){...}", "mq", true),
+            o("@mq 768 {...}", "wrong"),
+            o("@media-width 768 {...}", "w2"),
+          ]),
+        ],
+
+        // JS × 3
+        "js_0-30": [
+          q("So sánh nghiêm ngặt:", [
+            o("===", "s", true),
+            o("==", "ns"),
+            o("=", "asg"),
+          ]),
+          q("Khai báo biến an toàn:", [
+            o("let/const", "lc", true),
+            o("var", "var"),
+            o("auto", "auto"),
+          ]),
+          q("Mảng là kiểu:", [
+            o("object", "obj", true),
+            o("array", "arr"),
+            o("list", "list"),
+          ]),
+          q("Hàm mũi tên:", [
+            o("() => {}", "arrow", true),
+            o("function => {}", "fwrong"),
+            o("lambda {}", "l"),
+          ]),
+          q("Chuyển JSON string → object:", [
+            o("JSON.parse()", "parse", true),
+            o("JSON.stringify()", "str"),
+            o("toJSON()", "to"),
+          ]),
+        ],
+        "js_31-60": [
+          q("Vòng lặp duyệt phần tử mảng:", [
+            o("for...of", "fo", true),
+            o("for...in", "fi"),
+            o("while in", "wi"),
+          ]),
+          q("Ràng buộc ngữ cảnh this:", [
+            o("Function.prototype.bind", "bind", true),
+            o("this.set()", "ts"),
+            o("context()", "ctx"),
+          ]),
+          q("Chống hoisting bất ngờ:", [
+            o("dùng const/let", "cl", true),
+            o("dùng var", "v"),
+            o("dùng global", "g"),
+          ]),
+          q("Promise thành công:", [
+            o("resolve()", "res", true),
+            o("success()", "suc"),
+            o("ok()", "ok"),
+          ]),
+          q("Bắt lỗi bất đồng bộ:", [
+            o("try/catch + await", "tca", true),
+            o("catchSync()", "cs"),
+            o("onerror()", "one"),
+          ]),
+        ],
+        "js_61-100": [
+          q("Deep copy an toàn (đơn giản dữ liệu thuần):", [
+            o("structuredClone()", "sc", true),
+            o("obj=", "as"),
+            o("JSON.parse(obj)", "jp"),
+          ]),
+          q("Debounce dùng để:", [
+            o("giảm tần suất gọi hàm", "deb", true),
+            o("tăng tốc gọi", "inc"),
+            o("chặn gọi", "blk"),
+          ]),
+          q("Event loop gồm:", [
+            o("call stack, queue, microtask", "el", true),
+            o("heap, queue, net", "eq"),
+            o("stack, heap, cpu", "shc"),
+          ]),
+          q("Set khác Array ở:", [
+            o("không trùng phần tử", "set", true),
+            o("chỉ số âm", "neg"),
+            o("tự sắp xếp", "sort"),
+          ]),
+          q("Optional chaining:", [
+            o("obj?.prop", "oc", true),
+            o("obj??prop", "nc"),
+            o("obj::prop", "dc"),
+          ]),
+        ],
       };
 
+      // ======== Helpers để tạo câu hỏi ========
+      function q(legend, options) {
+        return { legend, options };
+      }
+      function o(label, value, correct = false) {
+        return { label, value, correct };
+      }
+      function esc(s) {
+        return s.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
+
+      const selectorForm = document.getElementById("selectorForm");
       const quizForm = document.getElementById("quizForm");
-      const testTitle = document.getElementById("testTitle");
       const resultText = document.getElementById("resultText");
 
-      let currentTest = "test1";
-
-      function renderForm() {
-        const t = tests[currentTest];
-        testTitle.textContent = t.title;
-
-        quizForm.innerHTML = t.questions
-          .map(
-            (q, idx) => `
-    <fieldset class="quiz-group">
-      <legend>${q.legend}</legend>
-      ${q.options
-        .map(
-          (op, i) => `
-        <label style="display:flex;gap:8px;align-items:center;margin:4px 0;">
-          <input type="radio" name="${q.name}" value="${op.value}">
-          <span>${op.label}</span>
-        </label>
-      `
-        )
-        .join("")}
-    </fieldset>
-  `
-          )
+      // Render 5 câu theo tổ hợp đã chọn
+      function renderQuestions(lang, age) {
+        const key = `${lang}_${age}`;
+        const set = bank[key];
+        if (!set) {
+          quizForm.innerHTML = "";
+          resultText.textContent = "Chưa có bộ câu hỏi cho tổ hợp này.";
+          return;
+        }
+        quizForm.innerHTML = set
+          .map((q, idx) => {
+            const name = `q${idx + 1}`;
+            return `
+          <fieldset class="quiz-group">
+            <legend>${idx + 1}. ${esc(q.legend)}</legend>
+            ${q.options
+              .map(
+                (op) => `
+              <label class="inline">
+                <input type="radio" name="${name}" value="${op.value}">
+                <span>${esc(op.label)}</span>
+              </label>
+            `
+              )
+              .join("")}
+          </fieldset>
+        `;
+          })
           .join("");
         resultText.textContent = "";
       }
 
-      function setActiveTab(btn) {
-        document.querySelectorAll(".quiz-tab").forEach((b) => {
-          const active = b === btn;
-          b.classList.toggle("active", active);
-          b.setAttribute("aria-selected", active ? "true" : "false");
-        });
-      }
-
-      document.querySelectorAll(".quiz-tab").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          currentTest = btn.dataset.test;
-          setActiveTab(btn);
-          renderForm();
-        });
+      // Nút tải câu hỏi
+      document.getElementById("loadBtn").addEventListener("click", () => {
+        const lang = new FormData(selectorForm).get("lang");
+        const age = new FormData(selectorForm).get("age");
+        if (!lang || !age) {
+          resultText.textContent =
+            "Hãy chọn đầy đủ cả 2 nhóm trước khi tải câu hỏi.";
+          return;
+        }
+        renderQuestions(lang, age);
       });
 
-      // Nộp bài: chấm điểm minh hoạ (đếm số radio đúng được chọn)
+      // Xóa lựa chọn tổ hợp
+      document.getElementById("clearBtn").addEventListener("click", () => {
+        selectorForm.reset();
+        quizForm.innerHTML = "";
+        resultText.textContent = "";
+      });
+
+      // Nộp bài → chấm điểm
       document.getElementById("submitBtn").addEventListener("click", () => {
-        const t = tests[currentTest];
-        let score = 0,
-          total = 0;
+        const lang = new FormData(selectorForm).get("lang");
+        const age = new FormData(selectorForm).get("age");
+        if (!lang || !age || quizForm.children.length === 0) {
+          resultText.textContent =
+            "Hãy chọn tổ hợp và bấm 'Tải 5 câu hỏi' trước khi nộp.";
+          return;
+        }
 
-        t.questions.forEach((q) => {
-          const sel = quizForm.querySelector(`input[name="${q.name}"]:checked`);
-          const correctValue = (q.options.find((o) => o.correct) || {}).value;
-          if (correctValue) total++;
-          if (sel && sel.value === correctValue) score++;
+        const key = `${lang}_${age}`;
+        const set = bank[key];
+        let correct = 0,
+          total = set.length;
+
+        set.forEach((q, idx) => {
+          const name = `q${idx + 1}`;
+          const sel = quizForm.querySelector(`input[name="${name}"]:checked`);
+          const right = q.options.find((op) => op.correct)?.value;
+          if (sel && sel.value === right) correct++;
         });
 
-        resultText.textContent = `Kết quả: ${score}/${total} câu đúng (${tests[currentTest].title}).`;
+        // quy đổi sang thang 10 (làm tròn 1 chữ số thập phân)
+        const score10 = (correct / total) * 10;
+        const score10Rounded = Math.round(score10 * 10) / 10; // 1 decimal
+
+        resultText.textContent = `Điểm: ${score10Rounded}/10  (đúng ${correct}/${total} câu – ${lang.toUpperCase()} & ${age})`;
       });
 
-      // Reset lựa chọn
+      // Reset câu trả lời hiện tại
       document.getElementById("resetBtn").addEventListener("click", () => {
         quizForm.reset();
         resultText.textContent = "";
       });
-
-      // Lần đầu hiển thị
-      renderForm();
     </script>
   </body>
 </html>

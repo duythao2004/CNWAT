@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #f9fafb;
+}
+
+.wrap {
+  width: 1000px;
+  margin: 0 auto;
+  border: 1px solid #ddd;
+}
+
+.head,
+.menu,
+.footer {
+  padding: 10px;
+  text-align: center;
+  background: #f3f4f6;
+}
+
+.main {
+  display: flex;
+}
+
+.left,
+.right {
+  width: 20%;
+  background: #f1f5f9;
+  padding: 10px;
+}
+
+.center {
+  width: 60%;
+  padding: 10px;
+}
+
+.footer {
+  margin-top: 10px;
+  background: #ddd;
+}
