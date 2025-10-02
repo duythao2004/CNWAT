@@ -1,0 +1,71 @@
+@import url("/CNWAT/bt2/css/style.css");
+
+/* layout 2 cột giống BT2/BT3 */
+.wrap {
+  display: grid;
+  grid-template-areas:
+    "student banner"
+    "menu    main"
+    "footer  footer";
+  grid-template-columns: 260px 1fr;
+  gap: 12px;
+  padding: 12px;
+  min-height: 100vh;
+}
+
+.student {
+  grid-area: student;
+}
+.banner {
+  grid-area: banner;
+}
+.menu {
+  grid-area: menu;
+}
+.main {
+  grid-area: main;
+}
+.footer {
+  grid-area: footer;
+}
+
+.banner-video {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* tabs ngang (menu nhiệm vụ bài 4) */
+.chips {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 8px;
+  padding: 8px 0;
+}
+.chip {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px 6px 0 0;
+  background: #f9fafb;
+  text-decoration: none;
+  color: #1f2937;
+}
+.chip.active {
+  background: #fff;
+  border-bottom: 2px solid #fff;
+  font-weight: 600;
+  color: #111;
+}
+
+/* footer dải màu 1 hàng */
+.footer-colors {
+  display: flex;
+  height: 40px;
+  width: 100%;
+}
+.footer-colors .color-box {
+  flex: 1;
+}

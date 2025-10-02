@@ -6,8 +6,6 @@
     <li><a href="bt2/bang-diem.html">1.2 Bảng điểm</a></li>
     <li><a href="bt2/ly-lich.html">1.3 Lý lịch</a></li>
     <li><a href="bt2/tin-tuc.html">1.4 Tin tức</a></li>
-
-    <!-- đại diện cho toàn bộ Bài 3 -->
     <li><a href="bt3/vidu.html">2.1 Ví dụ JS</a></li>
     <li><a href="bt3/trac-nghiem.html">2.2 Thi trắc nghiệm</a></li>
     <li><a href="bt3/form-lop.html">2.3 Form LỚP</a></li>
@@ -20,8 +18,6 @@
     <li><a href="bt3/may-tinh.html">2.10 Máy tính</a></li>
     <li><a href="bt3/hoat-anh.html">2.11 Hoạt ảnh</a></li>
     <li><a href="bt3/sap-xep.html">2.12 Sắp xếp</a></li>
-
-    <!-- CHỈ 1 mục đại diện cho Bài 4 -->
     <li><a class="active" href="bt4/index.php">3. Bài 4 (PHP & DB)</a></li>
   </ul>
 </nav>
