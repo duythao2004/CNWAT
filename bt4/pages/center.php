@@ -13,10 +13,8 @@ $items = [
   'web-langue'  => '4.10 web đa nn',
   'db-connect'  => '4.11 Kết nối DB',
   'db-query'    => '4.12 Truy vấn dữ liệu',
-  'shop-user'   => '4.13 Web bán laptop (End user)',
-  'shop-admin'  => '4.14 Web bán laptop (Admin)',
-  'cart'        => '4.15 Giỏ hàng',
-  'editor'      => '4.16 Richtext editor',
+  'shop'   => '4.X Web bán laptop',
+  
 ];
 $cur = $_GET['p'] ?? '';
 ?>

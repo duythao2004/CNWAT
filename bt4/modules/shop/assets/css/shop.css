@@ -1,0 +1,142 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: system-ui, Arial;
+  margin: 0;
+  background: #f6f7fb;
+  color: #111;
+}
+a {
+  color: #0a58ca;
+  text-decoration: none;
+}
+.container {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 16px;
+  padding: 16px;
+}
+
+.shop-header {
+  background: #111;
+  color: #fff;
+  padding: 12px 16px;
+}
+.shop-header .logo {
+  margin: 0;
+}
+.shop-header .top-links a,
+.shop-header .top-links span {
+  color: #fff;
+  margin-right: 10px;
+}
+.search-form {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+}
+.search-form input,
+.search-form select {
+  padding: 6px;
+}
+
+.sidebar {
+  background: #fff;
+  padding: 12px;
+  border-radius: 10px;
+}
+.content {
+  min-height: 300px;
+}
+.footer {
+  background: #111;
+  color: #fff;
+  padding: 10px 16px;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 12px;
+}
+.card {
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  text-align: center;
+}
+.card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.card .row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn {
+  background: #0a58ca;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn:disabled {
+  opacity: 0.6;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+.table th,
+.table td {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+}
+.thumb {
+  height: 40px;
+}
+.badge {
+  display: inline-block;
+  background: #eaf4ff;
+  color: #0a58ca;
+  padding: 4px 8px;
+  border-radius: 999px;
+  margin: 6px 0;
+}
+.muted {
+  opacity: 0.8;
+}
+.detail {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 16px;
+}
+.detail-img {
+  width: 100%;
+  border-radius: 12px;
+}
+.detail-info .price {
+  font-weight: 700;
+  font-size: 20px;
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.form label {
+  display: block;
+  margin: 6px 0;
+}
+.form-inline input {
+  padding: 6px;
+}
