@@ -2,18 +2,17 @@
 $action = $_GET['action'] ?? '';
 
 if ($action === 'add') {
-  require_login();                         // bắt buộc đăng nhập
+  require_login(); // bắt buộc đăng nhập
   $id  = (int)($_GET['id']  ?? 0);
   $qty = max(1, (int)($_GET['qty'] ?? 1));
 
-  // kiểm tra sản phẩm tồn tại
   $st = $pdo->prepare("SELECT id FROM products WHERE id=?");
   $st->execute([$id]);
   if ($st->fetch()) {
     cart_add($id, $qty);
-    redirect(['page'=>'cart','msg'=>'added']);   // <— dùng page
+    redirect(['page'=>'cart','msg'=>'added']);
   } else {
-    redirect(['page'=>'list']);                  // id không hợp lệ
+    redirect(['page'=>'list']);
   }
   exit;
 }
@@ -28,22 +27,29 @@ if ($action === 'update' && $_SERVER['REQUEST_METHOD']==='POST') {
   redirect(['page'=>'cart']); exit;
 }
 
+// Render giỏ
 $cart = cart_all(); $items=[]; $total=0;
 if ($cart) {
   $ids = array_keys($cart);
-  $marks = implode(',', array_fill(0,count($ids),'?'));
+  $marks = implode(',', array_fill(0, count($ids), '?'));
   $st = $pdo->prepare("SELECT id,name,price,image FROM products WHERE id IN ($marks)");
-  $st->execute($ids); $rows=$st->fetchAll(); $map=[];
-  foreach($rows as $r) $map[$r['id']]=$r;
-  foreach($cart as $pid=>$qty){
+  $st->execute($ids);
+  $rows = $st->fetchAll();
+  $map=[]; foreach($rows as $r) $map[$r['id']]=$r;
+  foreach ($cart as $pid=>$qty) {
     if (!isset($map[$pid])) continue;
-    $line = $map[$pid]; $line['qty']=$qty; $line['line_total']=$qty*$line['price'];
-    $items[]=$line; $total+=$line['line_total'];
+    $line=$map[$pid];
+    $line['qty']=$qty;
+    $line['line_total']=$qty*$line['price'];
+    $total += $line['line_total'];
+    $items[]=$line;
   }
 }
 ?>
 <h2>Giỏ hàng</h2>
-<?php if (($_GET['msg'] ?? '')==='added'): ?><div class="badge">Đã thêm sản phẩm vào giỏ.</div><?php endif; ?>
+<?php if (($_GET['msg'] ?? '')==='added'): ?>
+  <div class="badge">Đã thêm sản phẩm vào giỏ.</div>
+<?php endif; ?>
 
 <?php if (!$items): ?>
   <p>Giỏ hàng trống.</p>
@@ -52,7 +58,7 @@ if ($cart) {
   <table class="table">
     <thead><tr><th>Ảnh</th><th>Tên</th><th>Giá</th><th>SL</th><th>Thành tiền</th><th></th></tr></thead>
     <tbody>
-      <?php foreach($items as $it): ?>
+    <?php foreach ($items as $it): ?>
       <tr>
         <td><img src="bt4/modules/shop/assets/img/<?= htmlspecialchars($it['image']) ?>" style="height:48px"></td>
         <td><?= htmlspecialchars($it['name']) ?></td>
@@ -61,7 +67,7 @@ if ($cart) {
         <td><?= money($it['line_total']) ?></td>
         <td><a href="<?= url(['page'=>'cart','action'=>'remove','id'=>$it['id']]) ?>">Xoá</a></td>
       </tr>
-      <?php endforeach; ?>
+    <?php endforeach; ?>
     </tbody>
   </table>
   <p><strong>Tổng:</strong> <?= money($total) ?></p>

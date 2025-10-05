@@ -19,18 +19,7 @@ $cats = $pdo->query("SELECT id,name FROM categories ORDER BY name")->fetchAll();
     <?php endif; ?>
   </nav>
 
-  <form class="search-form" method="get" action="<?= url(['page'=>'search']) ?>">
-  <input name="q" placeholder="Nhập từ khóa..." value="<?= htmlspecialchars($_GET['q'] ?? '') ?>">
-  <select name="cat">
-    <option value="0">-- Tất cả loại --</option>
-    <?php foreach ($cats as $c): ?>
-      <option value="<?= $c['id'] ?>" <?= ((int)($_GET['cat'] ?? 0) === (int)$c['id']) ? 'selected' : '' ?>>
-        <?= htmlspecialchars($c['name']) ?>
-      </option>
-    <?php endforeach; ?>
-  </select>
-  <button type="submit">Tìm</button>
-</form>
+
 </header>
 
 <main class="container">

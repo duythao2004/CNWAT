@@ -5,6 +5,9 @@ if ($mod) {
   $f = __DIR__."/modules/$mod/index.php";             // p=tpl, getpost, …
   if (is_file($f)) $center = $f;
 }
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 ?>
 <!doctype html>
 <html lang="vi">
@@ -22,6 +25,7 @@ if ($mod) {
     <?php include __DIR__.'/pages/menu.php'; ?>   
 
     <main class="main">
+      
       <?php include $center; ?>                    
       <?php include __DIR__.'/pages/right.php'; ?>  
       

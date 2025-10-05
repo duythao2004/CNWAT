@@ -13,11 +13,7 @@ $prods = $st->fetchAll();
     <p><?= money($p['price']) ?></p>
     <div class="row">
       <a class="btn" href="<?= url(['page'=>'detail','id'=>$p['id']]) ?>">Chi tiết</a>
-      <a class="btn"
-   href="<?= url(['page'=>'cart','action'=>'add','id'=>$p['id'],'qty'=>1]) ?>">
-  Thêm giỏ
-</a>
-
+      <a class="btn" href="<?= url(['page'=>'cart','action'=>'add','id'=>$p['id'],'qty'=>1]) ?>">Thêm giỏ</a>
     </div>
   </div>
 <?php endforeach; ?>

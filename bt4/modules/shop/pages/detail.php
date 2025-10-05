@@ -13,13 +13,12 @@ if (!$p) { echo "<p>Không tìm thấy sản phẩm.</p>"; return; }
     <div class="desc"><?= $p['description'] ?></div>
 
    <form method="get" action="<?= url(['page'=>'cart']) ?>">
-  <input type="hidden" name="p" value="shop">
-  <input type="hidden" name="page" value="cart">
   <input type="hidden" name="action" value="add">
   <input type="hidden" name="id" value="<?= $prod['id'] ?>">
-  <input type="number" name="qty" value="1" min="1">
-  <button class="btn">Thêm vào giỏ</button>
+  <input type="number" name="qty" value="1" min="1" style="width:80px">
+  <a class="btn" href="<?= url(['page'=>'cart','action'=>'add','id'=>$p['id']]) ?>">Thêm giỏ hàng</a>
 </form>
+
 
   </div>
 </div>
