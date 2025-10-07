@@ -17,6 +17,7 @@ echo '<h2>Quản trị Shop</h2>
   <a class="chip '.($tab==='dashboard'?'active':'').'" href="'.url(['page'=>'admin','tab'=>'dashboard']).'">Dashboard</a>
   <a class="chip '.($tab==='categories'?'active':'').'" href="'.url(['page'=>'admin','tab'=>'categories']).'">Loại</a>
   <a class="chip '.($tab==='products'?'active':'').'" href="'.url(['page'=>'admin','tab'=>'products']).'">Sản phẩm</a>
+  <a class="chip '.($tab==='users'?'active':'').'" href="'.url(['page'=>'admin','tab'=>'users']).'">QLuser</a>
   <a class="chip" href="'.url(['page'=>'logout']).'">Đăng xuất</a>
 </nav>';
 
@@ -24,7 +25,8 @@ echo '<h2>Quản trị Shop</h2>
 $map = [
   'dashboard'  => __DIR__.'/dashboard.php',
   'categories' => __DIR__.'/categories.php',  // file này có redirect()
-  'products'   => __DIR__.'/products.php',    // file này cũng có redirect()
+  'products'   => __DIR__.'/products.php', 
+  'users'     => __DIR__.'/users.php',   // file này cũng có redirect()
 ];
 include $map[$tab] ?? $map['dashboard'];
 

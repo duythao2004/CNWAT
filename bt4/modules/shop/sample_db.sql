@@ -49,4 +49,4 @@ INSERT INTO products(name,price,category_id,image,description) VALUES
 -- Tài khoản admin demo (admin/admin)
 INSERT INTO users(username,password,role)
 VALUES ('admin', MD5('admin'),'admin'),
-       ('user1', MD5('123456'),'user');
+       ('user', MD5('user'),'user');
