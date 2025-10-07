@@ -50,3 +50,10 @@ INSERT INTO products(name,price,category_id,image,description) VALUES
 INSERT INTO users(username,password,role)
 VALUES ('admin', MD5('admin'),'admin'),
        ('user', MD5('user'),'user');
+
+ALTER TABLE users
+  ADD COLUMN fullname VARCHAR(100) NULL,
+  ADD COLUMN birthday DATE NULL,
+  ADD COLUMN address  VARCHAR(255) NULL,
+  ADD COLUMN avatar   VARCHAR(255) NULL;
+
