@@ -79,7 +79,7 @@ $list=$pdo->query("SELECT p.*, c.name AS cat FROM products p LEFT JOIN categorie
   CKEDITOR.replace('desc', {
     height: 240,
     // có thể giản lược toolbar nếu muốn
-    removeButtons: 'Flash,Smiley,SpecialChar,PageBreak,Iframe'
+    //removeButtons: 'Flash,Smiley,SpecialChar,PageBreak,Iframe'
   });
 </script>
 

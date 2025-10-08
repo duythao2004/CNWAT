@@ -8,7 +8,7 @@
     <li><a href="bt2/tin-tuc.html">1.4 Tin tức</a></li>
     <li><a href="bt3/vidu.html">2.1 Ví dụ JS</a></li>
     <li><a href="bt3/trac-nghiem.html">2.2 Thi trắc nghiệm</a></li>
-    <li><a href="bt3/form-lop.html">2.3 Form LỚP</a></li>
+    <li><a href="bt3/nhap-lop.html">2.3 Form LỚP</a></li>
     <li><a href="bt3/hoso.html">2.4 Hồ sơ</a></li>
     <li><a href="bt3/form-dang-ky.html">2.5 Form đăng ký</a></li>
     <li><a href="bt3/danh-sach.html">2.6 Danh sách</a></li>
